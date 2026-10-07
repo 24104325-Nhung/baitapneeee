@@ -1,0 +1,74 @@
+/* ==========================================
+   1. KHỞI TẠO & MOBILE VIEW (Default)
+   ========================================== */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+figure {
+    margin: 0;
+    width: 100%;
+}
+
+    figure img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Đảm bảo ảnh lấp đầy khung tròn không bị bẹt */
+        display: block;
+    }
+
+/* ==========================================
+   2. TABLET VIEW (min-width: 772px)
+   ========================================== */
+@media screen and (min-width: 772px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    figure {
+        border-radius: 50%;
+        overflow: hidden;
+        aspect-ratio: 1 / 1; /* Ép khung thành hình vuông tỉ lệ 1:1 để bo thành hình tròn chuẩn */
+    }
+
+        figure:last-child {
+            grid-column: span 2;
+        }
+}
+
+/* ==========================================
+   3. LARGE SCREEN VIEW (min-width: 992px)
+   ========================================== */
+@media screen and (min-width: 992px) {
+    figure {
+        border-radius: 0;
+        aspect-ratio: auto; /* Bỏ bo tròn và trả về tỉ lệ ảnh gốc */
+    }
+
+        figure:last-child {
+            grid-column: auto;
+        }
+
+        figure:nth-child(3n) {
+            grid-column: span 2;
+        }
+}
+
+/* ==========================================
+   4. ACCESSIBILITY & DARK MODE
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    figure {
+        background-color: #1a1a1a;
+        color: #ffeb3b;
+        border: 2px solid black;
+    }
+}
